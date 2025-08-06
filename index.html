@@ -75,8 +75,7 @@
             </div>
             <div class="home-sci">
                 <a href="https://github.com/norhannabil"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:norhannabil76@gmail.com">
-                    <i class="fa-brands fa-google" ></i></a>
+                <a href="https:mailto:norhannabil76@gmail.com"><i class="fa-brands fa-google" ></i></a>
                 <a href="https://www.linkedin.com/in/norhannabil"> <i class="fa-brands fa-linkedin-in"></i></a>
 
 
@@ -133,7 +132,7 @@
                             </div>
                         </ul>
                         <div class="about-btn ">
-                            <a href="my file.pdf">Download CV
+                            <a href="norhan.cv.pdf">Download CV
 
                                 <i class="fa-solid fa-download"></i>
                             </a>
@@ -280,35 +279,36 @@
         <div class="container">
             <div class="content3">
                 <h2 class="text-center m-5  ">Contact me</h2>
-                <div class="row  align-content-center  g-3 w-50 m-auto">
+                <form id="contact_form" class="contact_form row  align-content-center  g-3 w-50 m-auto">
                     <div class="row g-2 ">
                         <div class="col-md-6 col-sm-12">
                             <div class="form-floating mb-3 ">
-                                <input type="text" class="form-control " id="floatingInput" placeholder="Name">
-                                <label for="floatingInput">Name</label>
+                                <input type="text" class="form-control   name" id="floatingInput" placeholder="Name">
+                                <label for="floatingInput" >Name</label>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-floating mb-3 me-0">
-                                <input type="email" class="form-control " id="floatingInput"
+                                <input type="email" class="form-control email" id="floatingInput"
                                     placeholder="name@example.com">
                                 <label for="floatingInput">Email address</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingtext" placeholder="text">
-                        <label for="floatingtext">Subject</label>
+                         <input type="text" class="form-control address" id="inputAddress" placeholder="1234 Main St">
+                        <label for="inputAddress" class="form-label">Address</label>
+
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control p-5" id="floatingtext" placeholder="text">
+                        <input type="text" class="form-control p-5 message" id="floatingtext" placeholder="text">
                         <label for="floatingtext">message for me</label>
                     </div>
                      <div class="contact-btn">
-                    <button onclick="send()" id="contact-btn" type="button" class="btn btn-lg px-2 m-4">SEEND
+                    <button id="contact-btn" type="submit" class="btn btn-lg px-2 m-4">SEEND
                         MESSAGE</button>
                 </div>
-                </div>
+                </form>
                
             </div>
         </div>
@@ -331,11 +331,51 @@
         </div>
     </div>
     <!---- end-copy-->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector("#contact_form").addEventListener("submit", sendMsg);
+  });
+
+  function sendMsg(e) {
+    e.preventDefault();
+
+    const name = document.querySelector(".name").value.trim();
+    const address = document.querySelector(".address").value.trim();
+    const email = document.querySelector(".email").value.trim();
+    const msg = document.querySelector(".message").value.trim();
+
+    if (!name || !address || !email || !msg) {
+      alert("من فضلك، قم بتعبئة جميع الحقول.");
+      return;
+    }
+
+    Email.send({
+      SecureToken: " cd408983-c82a-4516-aca4-ca57df236f59 ",
+      To: 'norhannabil76@gmail.com',
+      From: "norhannabil76@gmail.com",
+      Subject: `رسالة جديدة من ${name}`,
+      Body: `
+        <h3>تفاصيل الرسالة</h3>
+        <p><strong>الاسم:</strong> ${name}</p>
+        <p><strong>البريد الإلكتروني:</strong> ${email}</p>
+        <p><strong>العنوان:</strong> ${address}</p>
+        <p><strong>الرسالة:</strong><br>${msg}</p>
+      `
+    }).then(
+      message => {
+        alert("تم إرسال الرسالة بنجاح ✅");
+      }
+    ).catch(
+      error => {
+        alert("حدث خطأ أثناء الإرسال ❌: " + error);
+        console.error(error);
+      }
+    );
+  }
+</script>
 
 
-
-
-
+<script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
 </body>
