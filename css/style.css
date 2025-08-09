@@ -159,7 +159,7 @@ background: var(--main-color);
 }
 
 .home-sci{
-  position: absolute;
+  margin-top: 33px;
   bottom: 2rem;
   width:170px;
   display: flex;
@@ -343,7 +343,9 @@ color:  rgb(255, 255, 255)
  
 }
 
-
+.progress-bar{
+  background-color: var(--main-color); 
+}
 
 
 /*start contact*/
